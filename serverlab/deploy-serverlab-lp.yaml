@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serverlab-nginx-lp
+  namespace: serverlab-prod
+  labels:
+    app: serverlab-nginx-lp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: serverlab-nginx-lp
+  template:
+    metadata:
+      labels:
+        app: serverlab-nginx-lp
+    spec:
+      priorityClassName: low-priority
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "0.05"
+            memory: "128Mi"
+          requests:
+            cpu: "0.01"
+            memory: "64Mi"

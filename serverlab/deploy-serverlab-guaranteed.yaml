@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serverlab-guaranteed
+  namespace: serverlab
+  labels:
+    app: serverlab-guaranteed
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: serverlab-guaranteed
+  template:
+    metadata:
+      labels:
+        app: serverlab-guaranteed
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "0.05"
+            memory: "32Mi"
+          requests:
+            cpu: "0.05"
+            memory: "32Mi"
+

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cookie-monster
+  labels:
+    app: cookie-monster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cookie-monster
+  template:
+    metadata:
+      labels:
+        app: cookie-monster
+    spec:
+      containers:
+      - name: cookie-monster
+        image: serverlab/cookie_monster:0.1.0
+        imagePullPolicy: Always
+
+# Remove Taint
+# kubectl taint nodes gke-cluster-1-default-pool-4bd7b582-9l7k node.kubernetes.io/memory-pressure:NoSchedule-
