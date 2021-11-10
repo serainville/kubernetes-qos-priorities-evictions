@@ -47,6 +47,7 @@ The following repo was created for testing Kubernetes' eviction behaviours, and 
 ## Attack the Cluster
 Cookie_Monster is a application specifically designed to consume the available resources of a container host. To test Kubernete's behaviour with evictions and limts, for example, deploy the application to your cluster.
 
+### Getting Started
 1. Deploy Cookie Monster!
     ```shell
     kubectl deploy -f deploy-chomper.yaml
@@ -59,4 +60,30 @@ Cookie_Monster is a application specifically designed to consume the available r
 4. If you would like to stop Cookie Monster, give him a cookie!
     ```shell
     kubectl exec POD -- touch /cookie
-    ```
+
+### Adjust PriorityClass
+Apply a PriorityClass to Cookie Monster and monitor how that impacts Kubernetes eviction order.
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cookie-monster
+  labels:
+    app: cookie-monster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cookie-monster
+  template:
+    metadata:
+      labels:
+        app: cookie-monster
+    spec:
+      priorityClassName: high-priority
+      containers:
+      - name: cookie-monster
+        image: serverlab/cookie-monster:0.1.0
+        imagePullPolicy: Always
+
+```
