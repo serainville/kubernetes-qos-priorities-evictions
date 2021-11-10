@@ -16,8 +16,5 @@ spec:
     spec:
       containers:
       - name: cookie-monster
-        image: serverlab/cookie_monster:0.1.0
+        image: serverlab/cookie_monster:0.1.2
         imagePullPolicy: Always
-
-# Remove Taint
-# kubectl taint nodes gke-cluster-1-default-pool-4bd7b582-9l7k node.kubernetes.io/memory-pressure:NoSchedule-
