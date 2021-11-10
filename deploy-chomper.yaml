@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: cookie-monster
-        image: serverlab/cookie_monster:0.1.0
+        image: serverlab/cookie_monster:0.1.2
         imagePullPolicy: Always
